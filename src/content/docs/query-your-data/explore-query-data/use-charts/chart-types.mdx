@@ -724,5 +724,23 @@ This table contains all chart types. Whether a chart type is available for your 
         </tr>
       </tbody>
     </table>
+
+    <Callout variant="important">
+       `Export as CSV` doesn't support some queries:
+      * `COMPARE_WITH` clause:
+        ```
+        SELECT uniques(hostname)
+        FROM SystemSample COMPARE WITH 1 week ago 
+        LIMIT MAX
+        ```
+      * Timestamps in aggregated methods are not formatted as timestamp. Only `Timestamp` column is formated (case sensitive). 
+        ```
+        // It's not formatted since Timestamp is an alias not the column name.
+        SELECT max(timestamp) as 'Timestamp' from Transaction
+        ```
+      * 
+
+    </Callout>
+
   </Collapser>
 </CollapserGroup>
